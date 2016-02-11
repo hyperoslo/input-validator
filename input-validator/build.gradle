@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "0.3"
     }
     buildTypes {
         release {
@@ -22,4 +22,26 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'InputValidator'
+
+    publishedGroupId = 'no.hyper'
+    libraryName = 'InputValidator'
+    artifact = 'input-validator'
+
+    libraryDescription = 'This library validate EditText content based on their input type value'
+    libraryVersion = '0.3'
+
+    developerId = 'jeantuffier'
+    developerName = 'Jean Tuffier'
+    developerEmail = 'jean@hyper.com'
+}
+
+apply from: 'https://raw.githubusercontent.com/attwellBrian/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/attwellBrian/JCenter/master/bintrayv1.gradle'
+dependencies {
+    compile 'com.android.support:design:23.1.1'
 }
