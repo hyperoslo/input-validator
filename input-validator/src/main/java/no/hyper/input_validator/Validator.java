@@ -16,32 +16,61 @@ public class Validator {
 
     private String LOG_TAG = this.getClass().getSimpleName();
 
-    public boolean check(EditText editText, String error) {
+    public static boolean check(EditText editText, String error) {
         Checkable checkable = getTypeValidator(editText);
-        if (checkable.check()) {
+        boolean valid = isValid(checkable);
+        setError(editText, valid, error);
+        return valid;
+    }
+
+    public static boolean check(EditText editText, String pattern, String error) {
+        Checkable checkable = getTypeValidator(editText);
+        boolean valid = isValid(checkable, pattern);
+        setError(editText, valid, error);
+        return valid;
+    }
+
+    public static boolean check(TextInputLayout inputLayout, String error) {
+        Checkable checkable = getTypeValidator(inputLayout.getEditText());
+        boolean valid = isValid(checkable);
+        setError(inputLayout, valid, error);
+        return valid;
+    }
+
+    public static boolean check(TextInputLayout inputLayout, String pattern, String error) {
+        Checkable checkable = getTypeValidator(inputLayout.getEditText());
+        boolean valid = isValid(checkable, pattern);
+        setError(inputLayout, valid, error);
+        return valid;
+    }
+
+    private static boolean isValid(Checkable checkable) {
+        return checkable.check();
+    }
+
+    private static boolean isValid(Checkable checkable, String pattern) {
+        return checkable.checkWithPattern(pattern);
+    }
+
+    private static void setError(EditText editText, boolean isValid, String error) {
+        if (isValid) {
             editText.setError(null);
-            return true;
         } else {
             editText.setError(error);
-            return false;
         }
     }
 
-    public boolean check(TextInputLayout inputLayout, String error) {
-        EditText editText = inputLayout.getEditText();
-        Checkable checkable = getTypeValidator(editText);
-        if (checkable.check()) {
+    private static void setError(TextInputLayout inputLayout, boolean isValid, String error) {
+        if (isValid) {
             inputLayout.setErrorEnabled(false);
             inputLayout.setError(null);
-            return true;
         } else {
             inputLayout.setErrorEnabled(true);
             inputLayout.setError(error);
-            return false;
         }
     }
 
-    private Checkable getTypeValidator(EditText editText) {
+    private static Checkable getTypeValidator(EditText editText) {
 
         int type = editText.getInputType();
         String value = editText.getText().toString();

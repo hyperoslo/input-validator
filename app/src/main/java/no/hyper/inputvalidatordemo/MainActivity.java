@@ -30,11 +30,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void validate(View view) {
-        Validator validator = new Validator();
-        boolean checkText = validator.check(text, "text is not good");
-        boolean checkEmail = validator.check(email, "email is not good");
-        boolean checkPhone = validator.check(phone, "phone is not good");
-        boolean checkPassword = validator.check(password, "password is not good");
+        boolean checkText = Validator.check(text, "text is not good");
+        boolean checkEmail = Validator.check(email, "email is not good");
+        boolean checkPhone = Validator.check(phone, "phone is not good");
+        boolean checkPassword = Validator.check(password, "password is not good");
 
         Log.d("TEST", "checkText: " + checkText + ", checkEmail: " + checkEmail + ", checkPhone: " +
                 checkPhone + ", checkPassword: " + checkPassword);
