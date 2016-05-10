@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-You can also use `Validator.check(code, "\\d{4}" "email is not good")` for verification with custom pattern.
+You can also use `Validator.check(code, "\\d{4}", "code is not correct")` for verification with custom pattern.
 
 ##Default pattern/behavior
 * `date` : `"\\d{2}/\\d{2}/\\d{4}"`
